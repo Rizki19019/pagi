@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Skala Pagi</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+    body { background: linear-gradient(180deg,#fffef2,#f3fff7); min-height:100vh; }
+    .card { max-width:720px; margin:40px auto; padding:20px; }
+    .scale-btn { min-height:56px; font-weight:600; }
+    .tiny { font-size:0.9rem; color:#666; margin-top:10px; }
+    @media (max-width:420px){
+      .card{ margin:18px; padding:16px; }
+    }
+  </style>
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <div class="card box has-text-centered">
+      <h2 class="title is-5">Skala 1–10, kamu pengen balik tidur lagi gak?</h2>
+      <p class="tiny">Pilih salah satu jawaban yang paling mewakili perasaan pagimu (jangan bohong)</p>
+
+      <div class="columns is-mobile is-multiline is-centered" style="margin-top:18px;">
+        <div class="column is-full-mobile is-one-third-tablet">
+          <button class="button is-fullwidth is-danger scale-btn" onclick="jawab('100')">100</button>
+        </div>
+        <div class="column is-full-mobile is-one-third-tablet">
+          <button class="button is-fullwidth is-warning scale-btn" onclick="jawab('1000')">1000</button>
+        </div>
+        <div class="column is-full-mobile is-one-third-tablet">
+          <button class="button is-fullwidth is-success scale-btn" onclick="jawab('9999')">9999</button>
+        </div>
+      </div>
+
+      <p class="tiny">(Semua jawaban besar? hahaha)</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  function jawab(code){
+    // redirect ke result dengan query param
+    window.location.href = "result.html?choice=" + encodeURIComponent(code);
+  }
+</script>
+</body>
+</html>

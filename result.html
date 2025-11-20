@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hasil Pagi</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(180deg, #fff6f6, #f7fff0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wrap {
+      max-width: 760px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .sticker {
+      width: 140px;
+      height: auto;
+      margin-top: 14px;
+    }
+
+    .message-box {
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    @media(max-width:420px) {
+      .wrap {
+        padding: 16px;
+      }
+
+      .sticker {
+        width: 110px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+    <div class="message-box">
+      <h2 class="title is-4">Selamat Pagi!</h2>
+
+      <p id="resultText" class="content"></p>
+
+      <figure class="image is-inline-block">
+        <img id="sticker" class="sticker" src="" alt="sticker">
+      </figure>
+
+      <p style="margin-top:16px; color:#555; font-size:0.95rem;">
+        Libur kuliah hari ini, berarti waktunya santai sebentar. Rebah dulu, atau cuma nikmati pagi yang tenang. 🌿☀️
+      </p>
+
+
+    </div>
+  </div>
+
+  <script>
+    // ambil query param dari question.html
+    const params = new URLSearchParams(window.location.search);
+    const choice = params.get('choice');
+
+    const resultMap = {
+      '100': {
+        text: "Masih setengah ngantuk ya? Gapapa, tarik napas, siapin diri, dan santai dulu.😌",
+        sticker: "sleepy.webp"
+      },
+      '1000': {
+        text: "Drama pagi level medium! Tapi kamu masih semangat buka ini. Ambil waktu sebentar buat diri sendiri.💖",
+        sticker: "tired.gif"
+      },
+      '9999': {
+        text: "Wow 9999! Pagi epic banget. Tapi hebat, kamu masih sempat lihat ini. Kamu kuat dan keren!💪✨",
+        sticker: "energized.webp"
+      }
+    };
+
+    const defaultResult = {
+      text: "Jawaban nggak dikenali, tapi tetap: kamu lucu pagi ini dan siap hadapi hari. 🌅",
+      sticker: "sleepy.webp"
+    };
+
+    const result = resultMap[choice] || defaultResult;
+    const stickerEl = document.getElementById('sticker');
+    document.getElementById('resultText').innerText = result.text;
+    stickerEl.src = result.sticker;
+
+    // bagian audio dihapus
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pagi! Udah mandi?</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #fff7e6, #ffecec);
+
+            /* INI YANG MEMBUAT BENAR-BENAR CENTER */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .center-wrapper {
+            width: 100%;
+            max-width: 720px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .box-container {
+            width: 100%;
+            padding: 24px;
+        }
+
+        .jail-btn {
+            position: relative;
+            transition: 0.15s ease;
+        }
+
+        @media(max-width: 420px) {
+            .box-container {
+                padding: 16px;
+            }
+
+            .title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Fade-in animation untuk tombol reveal */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <audio id="popSound" src="pop.mp3" preload="auto"></audio>
+
+    <div class="center-wrapper">
+        <div class="box box-container has-text-centered">
+
+            <h1 class="title is-4">Pagi! Udah mandi belum?</h1>
+            <p class="subtitle is-6" style="color:#555;">Awas ya... jangan bohong 😏</p>
+
+            <div class="columns is-mobile is-multiline is-centered" style="margin-top: 20px;">
+                <div class="column is-half-mobile">
+                    <button id="btn1" class="button is-danger is-light is-fullwidth jail-btn">
+                        Udah kok
+                    </button>
+                </div>
+
+                <div class="column is-half-mobile">
+                    <button id="btn2" class="button is-warning is-light is-fullwidth jail-btn">
+                        Belum 😭
+                    </button>
+                </div>
+            </div>
+
+            <!-- Muncul belakangan -->
+            <button id="btn-reveal" class="button is-link is-fullwidth" style="display:none; margin-top:18px;">
+                Pencet ini aja deh...
+            </button>
+
+            <p id="hint" class="has-text-grey" style="display:none; margin-top:10px; font-size:0.9rem;">
+                🤣🤣🤣🤣🤣🤣🤣🤣
+            </p>
+
+        </div>
+    </div>
+
+
+    <script>
+        const btn1 = document.getElementById("btn1");
+        const btn2 = document.getElementById("btn2");
+        const btnReveal = document.getElementById("btn-reveal");
+        const hint = document.getElementById("hint");
+        const popSound = document.getElementById("popSound");
+
+        let revealTimerStarted = false;
+
+        function randomMove(el) {
+            const x = Math.random() * 140 - 70;
+            const y = Math.random() * 90 - 45;
+            el.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function startRevealTimer() {
+            if (!revealTimerStarted) {
+                revealTimerStarted = true;
+                setTimeout(() => {
+                    // mainkan suara pop
+                    popSound.play().catch(e => console.log("Audio error:", e));
+
+                    // tampilkan tombol & hint dengan animasi fade-in
+                    btnReveal.style.display = "block";
+                    hint.style.display = "block";
+
+                    btnReveal.classList.add("fade-in");
+                    hint.classList.add("fade-in");
+                }, 10000); // 10 DETIK
+            }
+        }
+
+        function handleEscape(e) {
+            e.preventDefault?.();
+            randomMove(e.currentTarget);
+            startRevealTimer();
+        }
+
+        ["mouseenter", "touchstart"].forEach(evt => {
+            btn1.addEventListener(evt, handleEscape, { passive: false });
+            btn2.addEventListener(evt, handleEscape, { passive: false });
+        });
+
+        // reset posisi tombol kabur
+        setInterval(() => {
+            btn1.style.transform = "translate(0,0)";
+            btn2.style.transform = "translate(0,0)";
+        }, 3500);
+
+        btnReveal.addEventListener("click", () => {
+            window.location.href = "question.html";
+        });
+    </script>
+
+
+
+</body>
+
+</html>
